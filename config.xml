@@ -10,7 +10,7 @@ version = "1.0">
   <author href="http://yuewen.fwg.hk/" email="ite@edb.gov.hk">ITE Section of the Education Bureau 教育局資訊科技教育組</author>
   
   <!-- Multi-Platform -->
-  <!--<preference name="phonegap-version" value="2.7.0" />-->
+  <preference name="phonegap-version" value="2.7.0" />
   <preference name="orientation" value="default" />
   <preference name="target-device" value="universal" />
   <preference name="fullscreen" value="false" />
