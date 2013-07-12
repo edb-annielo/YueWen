@@ -1,0 +1,222 @@
+@charset "utf-8";
+/* CSS Document */
+.passagefont{
+	font-family: DFKai-sb, BiauKai, "Microsoft JhengHei",STHeiti,"DFHeiLight-B5","DFHeiMedium-B5","DFLiHei-Md","Microsoft YaHei",STXihei,SimHei,DFKai-sb;
+}
+.divPassage.passagefont{
+	/*font-size: 18px;
+	line-height: 1.5;*/
+	font-size: 22px;
+	line-height: 1.5;
+}
+.divPassage .normalfont{
+	font-size: 17px;
+	line-height: 1.3;
+}
+
+.divPassage{
+	/*border:1px solid #ccc;
+	min-height:100px;
+	width:80%;
+	padding:5px;*/
+}
+.divPassage[display="11"]{
+	text-indent:2em;
+}
+.divPassage[display="11"] .tooltip {
+	text-indent:0;
+}
+
+.divPassageOuter.vertical .divPassage[display="11"]>div,
+.divPassageOuter.vertical .divPassage>div.header{
+	margin-left:20px;
+	margin-right:20px;
+}
+.divPassageOuter:not(.vertical) .divPassage[display="11"]>div,
+.divPassageOuter:not(.vertical) .divPassage>div.header{
+	margin-top:20px;
+	margin-bottom:20px;
+}
+
+.divPassage[display="21"]>div:not(.header){
+	margin-bottom:5px;
+}
+.divPassage[display="22"] span{
+	display:block;
+}
+.divPassage div.title{
+	text-indent:0;
+	font-weight:bold;
+}
+.divPassage div.author{
+	text-align:right;
+}
+
+
+/****************************************************/
+.divPassageOuter {
+		padding:10px;
+		box-shadow:3px 3px 13px #ccc;
+		margin-bottom:30px;
+		margin-top:30px;
+		border:#e6e6e6 1px solid;
+}
+.vertical{
+	-webkit-writing-mode: vertical-rl;
+	-ms-writing-mode: vertical-rl;
+	-ms-writing-mode: tb-rl;
+	writing-mode: vertical-rl;
+	-moz-writing-mode: vertical-rl;
+}
+.divPassageOuter blockquote{
+	padding:20px;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+.divPassageOuter.vertical{
+	max-height:500px;
+	max-width:95%;
+	overflow-x:auto;
+}
+.divPassageOuter.vertical blockquote{
+	margin-top:0px;
+	margin-bottom:0px;
+	padding:10px;
+}
+
+/****************************************************/
+.divPassage.reading span:hover{
+	/*color:dark-red;*/
+	background-color:yellow;
+}
+
+/****************************************************/
+.divPassage.exercise span{
+	text-indent:0;
+	display:inline;
+	vertical-align:top;
+}
+.divPassage.exercise span div.sentence {
+	text-indent:0;
+	display:inline;
+	cursor:pointer;
+}
+.divPassage.exercise span div.translation,
+.divPassage.exercise span div.phrases{
+	display:none;
+	text-indent:0;
+	margin-right:5px;
+	background-color:#f0f0f0;
+	border:1px #999 dashed;
+	margin-top:2px;
+}
+.divPassage.exercise span div.phrases{
+	border-color:#f0f0f0;
+}
+.divPassage.exercise span.open{
+	display:inline-block;
+	margin-bottom:5px;
+}
+.divPassage.exercise span.open div.sentence {
+	cursor:auto;
+}
+.divPassage.exercise span.open.current div.sentence{
+	/*background-color: yellow;*/
+	color:red;
+}
+.divPassage.exercise span.open div.sentence,
+.divPassage.exercise span.open div.translation,
+.divPassage.exercise span.open div.phrases{
+	display:block;
+}
+
+.divPassage.exercise span.open div.phrases:empty:after {
+	text-shadow: 0 1px 0 #FFFFFF;
+	padding-left:5px;
+	font-weight: bold;
+	font-size: 18px;
+	line-height:1;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.divPassage.exercise span.open div.phrases:empty:after{
+	/*content:"\00D7";*/
+	content:"\21CA";
+	color: #000000;
+}
+.divPassage.exercise span.open.correct div.phrases{
+	text-align:right;
+}
+.divPassage.exercise span.open.correct div.phrases:empty:after{
+	content: "\2714";
+	color: #51A351;
+}
+.divPassage.exercise span.open:not(.correct) div.phrases:empty:after{
+	opacity: 0.4;
+}
+.divPassage.exercise span.open div.translation:empty:after{
+	content:"\00A0";
+	font-style:italic;
+	text-align:center;
+	color:#999;
+}
+.divPassage.exercise span.open.correct div.translation{
+	color:#666;
+}
+.divPassage.exercise span.open:not(.correct) span.phrase {
+	border-radius: 3px 3px 3px 3px;
+	background-color: #3A87AD;
+	color: #FFFFFF;
+	display: inline-block;
+	/*font-size: 11.844px;*/
+	font-weight: bold;
+	/*line-height: 14px;*/
+	padding: 2px 4px;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	vertical-align: baseline;
+	white-space: nowrap;
+	cursor:pointer;
+}
+
+.divPassage.exercise span.open div.phrases{
+	color:#666;
+}
+.divPassage.exercise span.open div.phrases span.phrase:not(:last-child):after{
+	/*content:"/";*/
+}
+.divPassage.exercise span.open div.phrases span.phrase{
+	margin-left:1px; 
+	margin-right:1px;
+	
+}
+.divPassage.exercise span.open div.phrases:empty {
+	cursor:pointer;
+}
+.divPassage.exercise span.correct div.phrases{
+	background:none;
+}
+.divPassage.exercise span.correct div.translation,
+.divPassage.exercise span.correct div.phrases{
+	border:none;
+}
+.divPassage.exercise div.sentence.blink{
+	animation: blink-b 1s step-end infinite;
+	-webkit-animation: blink-b 1s step-end infinite;
+}
+.divPassage.exercise span.phrase.blink{
+	animation: blink-w 1s step-end infinite;
+	-webkit-animation: blink-w 1s step-end infinite;
+}
+
+
+@keyframes blink-w { 
+   50% { background-color: #F89406; } 
+}
+@-webkit-keyframes blink-w {
+    50% { background-color: #F89406; } 
+}
+@keyframes blink-b { 
+   50% { background-color: yellow; } 
+}
+@-webkit-keyframes blink-b {
+    50% { background-color: yellow; } 
+}

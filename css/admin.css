@@ -1,0 +1,137 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+body, input, select, textarea, .tooltip{
+	font-family:"Microsoft JhengHei", STHeiti, "DFHeiLight-B5", "DFHeiMedium-B5", "DFLiHei-Md", "Microsoft YaHei", STXihei, SimHei, DFKai-sb;
+}
+
+header img{
+	height:30px;
+}
+.siteIcon{
+	height:1em;
+}
+.external {
+	background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAVklEQVR4Xn3PgQkAMQhDUXfqTu7kTtkpd5RA8AInfArtQ2iRXFWT2QedAfttj2FsPIOE1eCOlEuoWWjgzYaB/IkeGOrxXhqB+uA9Bfcm0lAZuh+YIeAD+cAqSz4kCMUAAAAASUVORK5CYII=") no-repeat scroll right center transparent;
+	padding-right:13px;
+	text-decoration: none;
+}
+.add-new {
+	text-decoration: none;
+}
+input, select, textarea{
+	 font-size:15px;
+}
+input[invalid], select[invalid], textarea[invalid]{
+	box-shadow: 0px 0px 5px red;
+}
+nav{
+	padding:2px 5px;
+	background:#FFC;
+	margin-bottom:10px;
+}
+.container{
+	padding-top:45px;
+}
+.container>.alert{
+	margin-top:10px;
+}
+img{
+	vertical-align:middle;
+}
+.tbList:not(.table) td, .tbList:not(.table) th {
+	border:1px solid #999;
+	border-collapse:collapse;
+	padding:2px 5px;
+}
+
+.tbList tr .editing,
+.tbList tr .deleting,
+.tbList tr.editing .normal,
+.tbList tr.deleting .normal{
+	display:none;
+}
+.tbList tr.editing .editing,
+.tbList tr.deleting .deleting{
+	display:block;
+}
+.tbList th.subheader{
+	background-color:#eee;
+	text-align:left;
+}
+.tbList .divTitle{
+	/*font-weight:bold;*/
+}
+.tbList div.divStatus{
+	margin-top:10px;
+}
+.divStatus, 
+.tbList .divStatus{
+	font-weight:normal;
+}
+.nowrap{
+	white-space:nowrap;
+}
+.divButtons form{
+	display:inline-block;
+}
+div.line{
+	margin-top:5px;
+	margin-bottom:5px;
+}
+
+.note{
+	line-height:12px;
+	font-size:9px;
+}
+.requiredFld:after {
+	content: "*";
+    display:inline;
+    color:#F00;
+	font-weight:bold;
+}
+textarea[readonly]{
+	background-color:#f0f0f0;
+}
+.divFormPage input[type=text], 
+.divFormPage select {
+	/*width:60%;*/
+}
+.divFormPage textarea {
+	/*width:80%;*/
+}
+#txtPassage{
+	height:200px;
+}
+
+
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) { 
+	.navbar-fixed-top {
+		margin-bottom: 0px;
+	}
+	.container{
+		padding-top:0px;
+	}
+}
+ /* Landscape phone to portrait tablet */
+@media (max-width: 767px) { 
+	.navbar-fixed-top {
+		margin-bottom: 0px;
+	}	
+	.container{
+		padding-top:0px;
+	}
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) { 	
+	.navbar-fixed-top {
+		margin-bottom: 0px;
+	}	
+	.container{
+		padding-top:0px;
+	} 
+}

@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html><!-- InstanceBegin template="/Templates/layout2.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>文言語譯 (測試版)</title>
+<!-- InstanceBeginEditable name="head" -->
+<!-- InstanceEndEditable -->
+</head>
+
+<body>
+<div id="page">
+<div id="content" class="container">
+  <div class="page-header">
+  <h1><!-- InstanceBeginEditable name="PageTitle" --><%- checkMode('translation')?"語譯練習":"目錄" %><!-- InstanceEndEditable -->
+  <small><!-- InstanceBeginEditable name="SubTitle" -->進階搜尋<!-- InstanceEndEditable --></small></h1>
+  <!-- InstanceBeginEditable name="Submenu" --><!--Submenu--><!-- InstanceEndEditable -->
+  <!-- InstanceBeginEditable name="Breadcrumb" --><ul class="breadcrumb">
+        <li><a href="<%- query() %>"><%- checkMode('translation')?"語譯練習":"目錄" %></a> <span class="divider">/</span></li>
+        <li class="active">進階搜尋</li>
+    </ul><!-- InstanceEndEditable --> 
+  </div>
+<!-- InstanceBeginEditable name="content" -->
+<form action="<%- query({search:null}, null, '') %>" method="post" class="form-horizontal">
+    <div class="control-group">
+      <label for="txtTitle" class="control-label">搜尋字眼：</label>
+      <div class="controls">
+      <input type="search" id="txtSearch" name="txtSearch" value="<%- searchData.searchStr['any'] %>"  autofocus  class="span8" />
+      <div><small class="muted">篇章名稱、作者/出處、首句、文類、程度、朝代、分類、標籤</small></div>
+      </div>
+    </div>
+    <div class="control-group">
+      <label for="txtTitle" class="control-label">篇章名稱：</label>
+      <div class="controls">
+      <input type="search" id="txtTitle" name="txtTitle" value="<%- searchData.searchStr['title'] %>" class="span8" />
+      <output for="txtTitle"></output>
+      </div>
+    </div>
+    <div class="control-group">
+      <label for="txtAuthor" class="control-label">作者/出處：</label>
+      <div class="controls">
+      <input type="search" id="txtAuthor" name="txtAuthor" value="<%- searchData.searchStr['author'] %>" class="span8" />
+      </div>
+    </div>
+    <div class="control-group">
+      <label for="txtFirstLine" class="control-label">首句：</label>
+      <div class="controls">
+      <input type="search" id="txtFirstLine" name="txtFirstLine" value="<%- searchData.searchStr['firstLine'] %>" class="span8" /> 
+      </div>
+    </div>
+    <div class="control-group">
+      <label for="ddlStylistic" class="control-label">文類：</label>
+      <div class="controls">
+      <select id="ddlStylistic" name="ddlStylistic">
+          <option value="">-- 所有文類 --</option>
+          <% $.each(stylistics, function(index, stylistic){ %>
+          <option value="<%- stylistic.name %>" <%  if(searchData.searchStr['stylistic'] == stylistic.name){ print('selected'); } %> ><%- stylistic.name %></option>
+          <% }); %>
+          <option value="NULL" <% if(search_isNULL(searchData.searchStr['stylistic'])) { print('selected'); } %> >-- (未填寫) --</option>
+      </select>
+      </div>
+    </div>
+    <% if(false) { %>
+    <div class="control-group">
+      <label for="ddlLevel" class="control-label">程度：</label>
+      <div class="controls">
+      <select id="ddlLevel" name="ddlLevel">
+          <option value="">-- 所有程度 --</option>
+          <% $.each(levels, function(index, level){ %>
+          <option value="<%- level.name %>" <%  if(searchData.searchStr['level'] == level.name){ print('selected'); } %> ><%- level.name %></option>
+          <% }); %>
+          <option value="NULL" <% if(search_isNULL(searchData.searchStr['level'])) { print('selected'); } %> >-- (未填寫) --</option>
+      </select>
+      </div>
+    </div>
+    <% } %>
+    <div class="control-group">
+      <label for="ddlDynasty" class="control-label">朝代：</label>
+      <div class="controls">
+      <select id="ddlDynasty" name="ddlDynasty">
+          <option value="">-- 所有朝代 --</option>
+          <% $.each(dynasties, function(index, dynasty){ %>
+          <option value="<%- dynasty.name %>" <%  if(searchData.searchStr['dynasty'] == dynasty.name){ print('selected'); } %> ><%- dynasty.name %></option>
+          <% }); %>
+          <option value="NULL" <% if(search_isNULL(searchData.searchStr['dynasty'])) { print('selected'); } %> >-- (未填寫) --</option>
+      </select>
+      </div>
+    </div>
+    <div class="control-group">
+      <label for="txtTags" class="control-label">標籤：</label>
+      <div class="controls">
+      <input type="search" id="txtTags" name="txtTags" value="<%- searchData.searchStr['tags'] %>" class="span8" /> 
+      </div>
+    </div>
+    <% if (!checkMode('translation')) { %>
+    <div class="control-group">
+      <label for="ddlTranslated" class="control-label">語譯：</label>
+      <div class="controls">
+      <select id="ddlTranslated" name="ddlTranslated">
+          <option value="">-- 所有狀態 --</option>
+          <% $.each(FIELDS["translated"]["values"], function(key, value){ %>
+          <option value="<%- key %>" <% if(searchData.searchStr['translated'] == key){ print('selected'); }  %> ><%- $("<div />").html(value).text() %></option>
+          <% }); %>
+      </select>
+      </div>
+    </div>
+    <% } %>
+    <div class="form-actions">
+      <a href="<%- query({search: null}, null, '#page/passage_search/') %>" id="btnClear" class="btn btn-warning" ><i class="icon-remove icon-white"></i> 清除</a>
+      <button type="reset" id="btnReset" class="btn" ><i class="icon-refresh"></i> 重設</button>
+      <button type="submit" id="btnSubmit" class="btn btn-primary" ><i class="icon-search icon-white"></i> 搜尋</button>
+    </div>
+</form>
+<!-- InstanceEndEditable --> 
+</div>
+</div>
+<!-- InstanceBeginEditable name="Code" --><!--Code--><!-- InstanceEndEditable --> 
+</body>
+<!-- InstanceEnd --></html>

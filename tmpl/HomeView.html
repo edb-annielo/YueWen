@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<!-- InstanceBegin template="/Templates/layout2.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>文言語譯 (測試版)</title>
+<!-- InstanceBeginEditable name="head" -->
+<!-- InstanceEndEditable -->
+</head>
+
+<body>
+<div id="page">
+  <div id="content" class="container">
+    <div class="page-header">
+      <h1><!-- InstanceBeginEditable name="PageTitle" -->主頁<!-- InstanceEndEditable --> <small><!-- InstanceBeginEditable name="SubTitle" --><!--SubTitle--><!-- InstanceEndEditable --></small></h1>
+      <!-- InstanceBeginEditable name="Submenu" --><!--Submenu--><!-- InstanceEndEditable --> <!-- InstanceBeginEditable name="Breadcrumb" --><!--Breadcrumb--><!-- InstanceEndEditable --> </div>
+    <!-- InstanceBeginEditable name="content" -->
+    <% if(siteInfo.isApp()) { %>
+    <div class="divDownload">
+    	<div class="divDownloadButton">
+    	<% if(siteInfo.isOfflineReady()) { %>
+            <button class="btn btn-large btnDownload" type="button">更新篇章</button>
+            <% if(siteInfo.get("lastOfflineUpdate") != null) { %>
+                <span class="spanLastUpdate">上次更新：<%- moment(siteInfo.get("lastOfflineUpdate")).format("YYYY-MM-DD") %></span>
+            <% } %>
+        <% } else { %>
+        	<button class="btn btn-large btn-primary btnDownload" type="button">下載篇章</button>
+        <% } %>
+        </div>
+        <div class="divProgress" style="display:none">
+        	<div>下載:<span class="spanProgress"></span></div>
+        	<div class="progress progress-striped"><div class="bar" style="width: 0%;"></div></div>
+        </div>
+    </div>
+    <% } %>
+    <div>
+      <ul class="thumbnails">
+        <li class="span2"><a href="#page/about" class="thumbnail"><img src="img/home/menu_about.png" alt="關於「悦文」" /></a></li>
+        <% if(!siteInfo.isApp() || siteInfo.isOfflineReady()) { %>
+        <li class="span2"><a href="#page/passage" class="thumbnail"><img src="img/home/menu_passage.png" alt="篇章" /></a></li>
+        <li class="span2"><a href="#page/passage/mode=translation" class="thumbnail"><img src="img/home/menu_trans.png" alt="語譯" /></a></li>
+        <% } %>
+      </ul>
+    </div>
+    <div>
+    <p class="span6 pull-left">注意：由於部分操作系統未能支援「香港常用字」，篇章內一些文字會有闕失，敬請留意。本組現正改善有關情況。</p>
+    <div class="text-right"><img src="img/home/bg.png" /></div>
+    </div>
+    <!-- InstanceEndEditable --> </div>
+</div>
+<!-- InstanceBeginEditable name="Code" --><!--Code--><!-- InstanceEndEditable -->
+</body>
+<!-- InstanceEnd -->
+</html>

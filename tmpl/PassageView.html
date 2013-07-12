@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<html><!-- InstanceBegin template="/Templates/layout2.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>文言語譯 (測試版)</title>
+<!-- InstanceBeginEditable name="head" -->
+<!-- InstanceEndEditable -->
+</head>
+
+<body>
+<div id="page">
+<div id="content" class="container">
+  <div class="page-header">
+  <h1><!-- InstanceBeginEditable name="PageTitle" --><%- checkMode('translation')?"語譯練習":"目錄" %><!-- InstanceEndEditable -->
+  <small><!-- InstanceBeginEditable name="SubTitle" --><!-- InstanceEndEditable --></small></h1>
+  <!-- InstanceBeginEditable name="Submenu" --><!--Submenu--><!-- InstanceEndEditable -->
+  <!-- InstanceBeginEditable name="Breadcrumb" --><!--Breadcrumb--><!-- InstanceEndEditable --> 
+  </div>
+<!-- InstanceBeginEditable name="content" -->
+<%
+if(!(empty2(searchData.searchStr))){
+	%>
+<div class="well well-small">
+<i class="icon-search"></i> 
+<% $.each(searchData.searchStr, function(key, value){ 
+		var keyChi = key;
+		var value_html = false;
+        if (key=="any"){
+        	keyChi = "搜尋字眼";
+        } else if(FIELDS[key] != null){
+        	keyChi = FIELDS[key]["name"];
+            try{
+                if(!empty2(FIELDS[key]["values"][value])){
+                    value= FIELDS[key]["values"][value];
+                    value_html = true;
+                }
+            }catch(err){}
+        }
+        if(!empty2(value)){
+			if(value.toUpperCase() == "NULL"){
+                value="(未填寫)";
+            }
+		}
+		print(keyChi+"："+(value_html?value:_.escape(value)));
+	
+    var tempSearch = {}; tempSearch[key]=null; 
+%><a class="close" href="<%- query({search:searchQuery(tempSearch)}) %>" style="float: none;">&times;</a>
+
+<% }); %>
+</div>
+<% } %>
+<div class="clearfix">
+<form action="<%- query({search:null}, null, '') %>" method="post" class="form-search">
+<input type="text"  name="txtSearch" class="input-xlarge search-query txtSearch" value="<%- searchData.searchText %>">
+<button type="submit" class="btn btn-success"><i class="icon-search icon-white"></i> 搜尋</button>
+<% if(!appFunc.isApp()){%>
+<a href="<%- query(null, null, '#page/passage_search/') %>">進階搜尋</a>
+<% } %>
+</form>
+<div class="pagination">
+  <ul>
+    <li class="disabled"><a href="javascript:void(0);">共<%- paging.rowCount %>篇<% if(paging.maxpage > 1) { %>，每頁<%- paging.pageSize %>篇<% } %></a></li>
+<%
+  if(paging.maxpage > 1) {
+	%>    
+    <% if(paging.pageNum == 1){ %>
+    <li class="disabled"><a href="javascript:void(0);">&laquo;</a></li>
+    <% } else { %>
+    <li><a href="<%- query({page:paging.pageNum-1}) %>">&laquo;</a></li>
+    <% } 
+    %>
+    <li><select class="ddlPager pull-left">
+    <%
+	for(var page=1; page<=paging.maxpage; page++) { 
+	 	if(paging.pageNum == page){ %>
+         	<option value="" selected>第<%- page %>頁</option>
+            <% } else {%>
+            <option value="<%- query({page:page}) %>">第<%- page %>頁</option>
+    	<% } %>
+    <% } %>
+    </select></li>
+    <% if(paging.pageNum == paging.maxpage){%>
+    <li class="disabled"><a href="javascript:void(0);">&raquo;</a></li>
+    <% } else {%>
+    <li><a href="<%- query({page:paging.pageNum+1}) %>">&raquo;</a></li>
+    <% } %>
+    <%
+  }
+%>
+  </ul>
+</div>
+    
+</div>
+
+<div class="divPassagesList hidden-phone">
+    <div class="figurelist">
+        <div id="wrapper">
+            <div id="scroller">
+                <ul>
+                    <% 
+                        for(var count=paging.startIndex; count<paging.endIndex; count++){
+                        var passage = passages[count-paging.startIndex];
+                        %><li><a href="#page/<%- checkMode('translation')?'translation':'reading' %>/id=<%- passage.id %>" class="thumbnail"><figure>
+                        <figcaption class="<%- (passage.title.length<=10)?'':((passage.title.length<=20)?'small':'small2') %>">  
+                        <h2><%- passage.title %></h2>
+                        <p><%- passage.author %></p>
+                        </figcaption>
+                    </figure></a></li><% } %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<table class="tbList table table-bordered table-hover">
+<thead>
+    <tr>
+    <th>*</th>
+    <th>
+    <% if(orderbyFld == "title") { %>
+    <a class="nowrap" href="<%- query({fld:'title', dir:(orderbyDir=='DESC'?'ASC':'DESC')}) %>">篇章名稱
+    <i class="<%- orderbyDir=='DESC'?'icon-chevron-down':'icon-chevron-up' %>"></i></a>
+    <% } else { %>
+    <a class="nowrap" href="<%- query({fld:'title', dir:'ASC'}) %>">篇章名稱</a>
+    <% } %></th>
+    <th><% if(orderbyFld == "author") { %>
+    <a href="<%- query({fld:'author', dir:(orderbyDir=='DESC'?'ASC':'DESC')}) %>">作者/出處
+    <i class="<%- (orderbyDir=='DESC')?'icon-chevron-down':'icon-chevron-up' %>"></i></a>
+    <% } else { %>
+    <a href="<%- query({fld:'author', dir:'ASC'}) %>">作者/出處</a>
+    <% } %></th>
+    <th><% if(orderbyFld == "stylistic") { %>
+    <a href="<%- query({fld:'stylistic', dir:(orderbyDir=='DESC'?'ASC':'DESC')}) %>">文類
+    <i class="<%- (orderbyDir=='DESC')?'icon-chevron-down':'icon-chevron-up' %>"></i></a>
+    <% } else { %>
+    <a href="<%- query({fld:'stylistic', dir:'ASC'}) %>">文類</a>
+    <% } %></th>
+    </tr>
+</thead>
+<tbody>
+<% 
+for(var count=paging.startIndex; count<paging.endIndex; count++){
+var passage = passages[count-paging.startIndex];
+%>
+<tr>
+<td><%- count+1 %></td>
+<th class="divTitle"><!-- <a href="passage_view.php?id=<%- passage.id %>" class="external">&nbsp;</a>-->
+<a href="#page/<%- checkMode('translation')?'translation':'reading' %>/id=<%- passage.id %>"><%- passage.title %></a></th>
+<td class="nowrap"><%- passage.author %></td>
+<td class="nowrap"><%- passage.stylisticText %></td>
+</tr>
+<% } %>
+</tbody>
+</table>
+<%
+if(paging.maxpage > 1){
+	%>
+	<div class="pagination">
+    <ul>
+    <% if(paging.pageNum == 1){ %>
+    <li class="disabled"><a href="javascript:void(0);">&laquo;</a></li>
+    <% } else { %>
+    <li><a href="<%- query({page:paging.pageNum-1}) %>">&laquo;</a></li>
+    <% } %>
+	<li><select class="ddlPager pull-left">
+    <%
+	for(var page=1; page<=paging.maxpage; page++) { 
+	 	if(paging.pageNum == page){ %>
+         	<option value="" selected>第<%- page %>頁</option>
+            <% } else {%>
+            <option value="<%- query({page:page}) %>">第<%- page %>頁</option>
+    	<% } %>
+    <% } %>
+    </select></li>
+    <% if(paging.pageNum == paging.maxpage){ %>
+    <li class="disabled"><a href="javascript:void(0);">&raquo;</a></li>
+    <% } else {%>
+    <li><a href="<%- query({page:paging.pageNum+1}) %>">&raquo;</a></li>
+    <% } %>
+    </ul>
+    </div>
+    <%
+}
+
+
+%>
+<!-- InstanceEndEditable --> 
+</div>
+</div>
+<!-- InstanceBeginEditable name="Code" --><!--Code--><!-- InstanceEndEditable --> 
+</body>
+<!-- InstanceEnd --></html>

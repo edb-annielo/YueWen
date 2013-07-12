@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html><!-- InstanceBegin template="/Templates/layout2.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>文言語譯 (測試版)</title>
+<!-- InstanceBeginEditable name="head" -->
+<!-- InstanceEndEditable -->
+</head>
+
+<body>
+<div id="page">
+<div id="content" class="container">
+  <div class="page-header">
+  <h1><!-- InstanceBeginEditable name="PageTitle" --><%- passage.title %><!-- InstanceEndEditable -->
+  <small><!-- InstanceBeginEditable name="SubTitle" --><%- passage.author %><!-- InstanceEndEditable --></small></h1>
+  <!-- InstanceBeginEditable name="Submenu" -->篇章內文<!-- InstanceEndEditable -->
+  <!-- InstanceBeginEditable name="Breadcrumb" --><!--Breadcrumb--><!-- InstanceEndEditable --> 
+  </div>
+<!-- InstanceBeginEditable name="content" -->
+<div class="text-right"><small>最後更新：<%- moment(passage.lastUpdate, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD") %></small></div>
+<% if(passage.translated == true) { %>
+<p class="pull-right"><a href="#page/translation/id=<%- passage.id %>" target="_blank" class="btn btn-large btn-primary"><i class="icon-align-justify icon-white"></i> 語譯練習</a></p>
+<% }  %>
+<div id="divDirection" class="clearfix">
+顯示方式：
+<div class="btn-group" data-toggle="buttons-radio">
+    <button type="button" id="btnHorizontal" class="btn" value="">橫書</button>
+    <button type="button" id="btnVertical" class="btn active" value="vertical">直書</button>
+</div>
+</div>
+<div id="divPassageOuter" class="divPassageOuter vertical">
+<blockquote id="divPassage" class="divPassage reading passagefont" display="<%- passage.displayStyle %>">
+<div class="header"><div class="title">　　　　<%- passage.title %></div>
+<div class="author"><%- passage.author %>　　</div></div>
+<%
+var paraGroup = 1;
+print('<div>');
+$.each(paraData, function(index, sentence){
+  if (sentence.paragraphGroup != paraGroup){
+	  print('</div><div>');
+  }
+  
+  print('<span>'+_.escape(sentence.sentence) +'</span>');
+  paraGroup = sentence.paragraphGroup;
+});
+print('</div>');
+%>
+</blockquote>
+</div>
+<dl class="dl-horizontal">
+	<% if(!empty2(passage.analysis)){ %>
+        <dt>題解：</dt>
+        <dd><%= passage.analysis %>&nbsp;</dd>
+    <% } %>
+    <dt>作者/出處：</dt>
+    <dd>
+		<% if(!empty2(author)) { %>
+        <a href="#myModal-author" role="button" data-toggle="modal"><%- passage.author %> </a>
+        <% } else { %>
+        	<%- passage.author %> 
+        <% } %>
+    </dd>
+  	<% if(!empty2(passage.stylisticText)){ %>
+        <dt>文類：</dt>
+        <dd><%- passage.stylisticText %>&nbsp;</dd>
+  	<% } %>
+    <% if(!empty2(passage.dynastyText)){ %>
+    <dt>朝代：</dt>
+    <dd><%- passage.dynastyText %>&nbsp;</dd>
+    <% } %>
+    <% if(!empty2(passage.levelText)){ %>
+    <dt>程度：</dt>
+    <dd><%- passage.levelText %>&nbsp;</dd>
+    <% } %>
+</dl>
+<% if(!empty2(passage.note)){ %>
+<dl class="dl-horizontal">
+<dt>注釋/補充：</dt>
+<dd>
+<%= passage.note %>
+</dd>
+</dl>
+<% } %>
+<dl class="dl-horizontal">
+	<% if(!empty2(passage.categoryText)){ %>
+        <dt>分類：</dt>
+        <dd><%- passage.categoryText %>&nbsp;</dd>
+    <% } %>
+    <% if(!empty2(passage.tags)){ %>
+    <dt>標籤：</dt>
+    <dd><div id="divTags"></div>&nbsp;</dd>
+    <% } %>
+</dl>
+<% if(!empty2(passage.tags)){ %>
+<textarea id="txtTags" name="txtTags" style="display:none;" class="span8"><%- passage.tags %></textarea>
+<% } %>
+<!-- Modal -->
+<% if(!empty2(author)) { %>
+<div id="myModal-author" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel"><%- author.name %></h3>
+    </div>
+    <div class="modal-body">
+    	<% if(!empty2(author.dynastyText)){ %>
+            <h4>朝代：<%- (author.dynastyText) %></h4>
+        <% } %>
+        <% if(!empty2(author.description)){ %>
+            <h4>簡介：</h4>
+            <div>
+            <%= author.description %>
+            </div>
+        <% } %>
+	</div>
+    <div class="modal-footer">
+    	<button class="btn" data-dismiss="modal" aria-hidden="true">關閉</button>
+    </div>
+</div>
+<% } %>
+<!-- InstanceEndEditable --> 
+</div>
+</div>
+<!-- InstanceBeginEditable name="Code" --><!--Code--><!-- InstanceEndEditable --> 
+</body>
+<!-- InstanceEnd --></html>

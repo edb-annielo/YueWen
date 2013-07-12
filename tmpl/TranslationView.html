@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html><!-- InstanceBegin template="/Templates/layout2.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>文言語譯 (測試版)</title>
+<!-- InstanceBeginEditable name="head" -->
+<!-- InstanceEndEditable -->
+</head>
+
+<body>
+<div id="page">
+<div id="content" class="container">
+  <div class="page-header">
+  <h1><!-- InstanceBeginEditable name="PageTitle" --><%- passage.title %><!-- InstanceEndEditable -->
+  <small><!-- InstanceBeginEditable name="SubTitle" --><%- passage.author %><!-- InstanceEndEditable --></small></h1>
+  <!-- InstanceBeginEditable name="Submenu" -->語譯練習<!-- InstanceEndEditable -->
+  <!-- InstanceBeginEditable name="Breadcrumb" --><!--Breadcrumb--><!-- InstanceEndEditable --> 
+  </div>
+<!-- InstanceBeginEditable name="content" -->
+<div id="page-translation">
+<div class="divAlerts">
+    <div class="alert alert-info">
+    	<h4>根據文言句子，重組其語譯詞組。 <a href="#myModal-instruction" role="button" class="btn btn-info" data-toggle="modal">說明</a></h4>
+        <div style="margin-top:5px">
+        <a href="#myModal-passage" role="button" class="btn" data-toggle="modal">原文</a></div>
+    </div>
+    <div class="alert alert-success">
+        <strong>完成：</strong> 語譯正確，語譯完成！！
+    </div>
+    <div class="alert alert-error">
+        <strong>不正確/部份不正確/未完成：</strong> 請再嘗試，繼續努力！！
+    </div>
+    <div class="alert alert-warning">
+        <strong>正確：</strong> 語譯正確，繼續努力！！
+    </div>
+</div>
+<div class="text-right">
+<button id="btnSubmit" class="btn btn-primary btn-large btnSubmit"><i class="icon-ok icon-white"></i> 核對語譯</button>
+</div>
+<div id="divPassageOuter" class="divPassageOuter">
+<blockquote id="divPassage" class="divPassage exercise passagefont" display="<%- passage.displayStyle %>">
+<div class="header"><div class="title">　　　　<%- passage.title %></div>
+<div class="author"><%- passage.author %>　　</div></div>
+<%
+var paraGroup = 1;
+print("<div>");
+$.each(paraData, function(index, sentence){
+  if (sentence.paragraphGroup != paraGroup){
+	  print("</div><div>");
+  }
+  print("<span><div class='sentence'>"+_.escape(sentence.sentence)+"</div>");
+  if(!empty2(sentence.phrases)){
+	  print("<div class='translation normalfont'></div>");
+  }
+  if(!empty2(sentence.phrases)){
+	  print("<div class='phrases normalfont'>"+_.escape(sentence.phrases)+"</div>");
+  }
+  print("</span>");
+  paraGroup = sentence.paragraphGroup;
+});
+print("</div>");
+%>
+</blockquote>
+</div> 
+<div class="text-right">
+<button id="btnSubmit2" class="btn btn-primary btn-large btnSubmit"><i class="icon-ok icon-white"></i> 核對語譯</button>
+</div>
+<br />
+<!-- Modal -->
+<div id="myModal-instruction" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">語譯練習：說明</h3>
+    </div>
+    <div class="modal-body">
+    	<h4>目標：</h4> 
+        <ul>
+        <li>根據文言句子，重組其語譯詞組。 </li>
+        </ul>
+        <h4>說明：</h4>
+        <ol>
+        <li>按一下任何文言句子（如：<span class="passagefont normalfont" id="lblSentence2"></span>），開始重組語譯。 </li>
+        <li>(順序)點選語譯詞組（如：<span id="lblPhrase2"></span>），把語譯重組到方格內。 
+            <ul><li>如需更改語譯詞組的次序，可再按一下該詞組，把詞組放回方格以下。</li>
+            <li>當重組全句的所有詞組後，方格以下會出現「<strong>&#x21CA;</strong>」。如需重新重組所有詞組，可按下「<strong>&#x21CA;</strong>」把所有詞組放回方格以下。</li></ul>
+        </li>
+        <li> 按一下「核對語譯」，檢查答案。
+        	<ul><li>可同時核對多句文言語譯。例如：可以完成整個段落的語譯，才作核對。</li></ul>
+        </li>
+        <li>重複&#x2780;，按下其他文言句子，直至完成全文的語譯重組。</li>
+        </ol>
+	</div>
+    <div class="modal-footer">
+    	<button class="btn" data-dismiss="modal" aria-hidden="true">關閉</button>
+    </div>
+</div>
+<div id="myModal-passage" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">語譯練習：原文</h3>
+    </div>
+    <div class="modal-body">
+    	<div id="divPassageOuter2" class="divPassageOuter">
+            <div id="divPassage2" class="divPassage passagefont" display="<%- passage.displayStyle %>">
+            <div class="header"><div class="title">　　　　<%- passage.title %></div>
+            <div class="author"><%- passage.author %>　　</div></div>
+            <%
+            var paraGroup = 1;
+            print("<div>");
+            $.each(paraData, function(index, sentence){
+              if (sentence.paragraphGroup != paraGroup){
+                   print("</div><div>");
+              }
+              print("<span>"+ _.escape(sentence.sentence)+ "</span>");
+              paraGroup = sentence.paragraphGroup;
+            });
+            print("</div>");
+            %>
+            </div>
+        </div> 
+	</div>
+    <div class="modal-footer">
+    	<button class="btn" data-dismiss="modal" aria-hidden="true">關閉</button>
+    </div>
+</div>
+</div>
+<!-- InstanceEndEditable --> 
+</div>
+</div>
+<!-- InstanceBeginEditable name="Code" --><!--Code--><!-- InstanceEndEditable --> 
+</body>
+<!-- InstanceEnd --></html>

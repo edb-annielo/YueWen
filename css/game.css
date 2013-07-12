@@ -1,0 +1,273 @@
+@charset "utf-8";
+/* CSS Document */
+body, input, select, textarea, .tooltip, .normalfont{
+	font-family:"Microsoft JhengHei", STHeiti, "DFHeiLight-B5", "DFHeiMedium-B5", "DFLiHei-Md", "Microsoft YaHei", STXihei, SimHei, DFKai-sb;
+}
+.normalfont{
+	font-size: 15px;
+	line-height: 1.3;
+}
+header img{
+	height:30px;
+}
+.siteIcon{
+	height:1em;
+}
+.navbar .nav>#socialToolbar{
+	padding: 10px 15px;
+}
+.external {
+	background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAVklEQVR4Xn3PgQkAMQhDUXfqTu7kTtkpd5RA8AInfArtQ2iRXFWT2QedAfttj2FsPIOE1eCOlEuoWWjgzYaB/IkeGOrxXhqB+uA9Bfcm0lAZuh+YIeAD+cAqSz4kCMUAAAAASUVORK5CYII=") no-repeat scroll right center transparent;
+	padding-right:13px;
+	text-decoration: none;
+}
+input, select, textarea{
+	 font-size:15px;
+}
+input[invalid], select[invalid], textarea[invalid]{
+	box-shadow: 0px 0px 5px red;
+}
+nav{
+	padding:2px 5px;
+	background:#FFC;
+	margin-bottom:10px;
+}
+.container{
+	/*padding-top:45px;*/
+}
+.container>.alert{
+	margin-top:10px;
+}
+img{
+	vertical-align:middle;
+}
+.tbList:not(.table) td, .tbList:not(.table) th {
+	border:1px solid #999;
+	border-collapse:collapse;
+	padding:2px 5px;
+}
+
+.tbList th.subheader{
+	background-color:#eee;
+	text-align:left;
+}
+.tbList .divTitle{
+	/*font-weight:bold;*/
+}
+.tbList div.divStatus{
+	margin-top:10px;
+}
+.divStatus, 
+.tbList .divStatus{
+	font-weight:normal;
+}
+.nowrap{
+	white-space:nowrap;
+}
+.divButtons form{
+	display:inline-block;
+}
+div.line{
+	margin-top:5px;
+	margin-bottom:5px;
+}
+
+.note{
+	line-height:12px;
+	font-size:9px;
+}
+.requiredFld:after {
+	content: "*";
+    display:inline;
+    color:#F00;
+	font-weight:bold;
+}
+textarea[readonly]{
+	background-color:#f0f0f0;
+}
+.divFormPage input[type=text], 
+.divFormPage select {
+	/*width:60%;*/
+}
+.divFormPage textarea {
+	/*width:80%;*/
+}
+#txtPassage{
+	height:200px;
+}
+#divTags .label{
+	margin-right:5px;
+	margin-bottom:5px;
+}
+.loading {
+	width:300px;
+	margin:auto;
+	max-width:75%;
+}
+/***********************************/
+
+
+html #page-translation #divPassageOuter,
+html #page-translation #divPassageOuter #divPassage {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); 
+    -webkit-user-select: none;
+    -webkit-touch-callout:none;
+} 
+#page-translation #lblSentence, #page-translation #lblPhrase,
+#page-translation #lblSentence2, #page-translation #lblPhrase2 {
+	font-style:italic;
+	font-weight:bold;
+}
+#page-translation .divAlerts .alert{
+	display:none;
+}
+#page-translation #divPassageOuter2 {
+	margin-top:0;
+}
+#page-translation .navbar{
+	display:none;
+}
+
+
+
+
+/***********************************/
+
+.divPassagesList{
+	display:block;
+	height: 272px;
+	margin-bottom:50px;
+}
+
+.figurelist {
+  	width: 100%;
+}
+
+.figurelist figure {
+	margin:0;
+	display: block;
+	width: 146px;
+	height: 242px;
+	border: none;
+	color: #000;
+	text-align: center;
+	background:url(../img/passage/passagebg.png) top left no-repeat;
+}
+.figurelist figure figcaption{
+	padding:30px 10px 25px 10px;
+	text-align: center;
+	line-height: 1.3;
+	font-size: 18px;
+}
+.figurelist figure figcaption h2{
+	font-size: 24px;
+	text-align:left;
+	font-weight:normal;
+	line-height: 1.3;
+	text-shadow: -1px -1px #FFFFFF;
+}
+.figurelist figure figcaption.small h2{
+	font-size: 20px;
+}
+.figurelist figure figcaption.small2 h2{
+	font-size: 18px;
+}
+.figurelist figure figcaption.small2{
+	font-size: 14px;
+}
+.figurelist figure figcaption p{
+	text-align:right;
+	color:#666;
+}
+.figurelist figure.current {
+	cursor:pointer;
+}
+.figurelist #scroller li a{
+	display:block;
+	margin:10px 5px;
+	text-decoration:none;
+}
+
+.figurelist #wrapper {
+	width:100%;
+	height:282px;
+
+	float:left;
+	position:relative;	/* On older OS versions "position" and "z-index" must be defined, */
+	z-index:1;			/* it seems that recent webkit is less picky and works anyway. */
+	overflow:hidden;
+
+	background::none;
+	border: 0px solid #CCC;
+	vertical-align:top;
+}
+
+.figurelist #scroller {
+	width:2000px;
+	height:100%;
+	float:left;
+	padding:0;
+}
+.figurelist #scroller ul {
+	list-style:none;
+	display:block;
+	float:left;
+	width:100%;
+	height:100%;
+	padding:0;
+	margin:0;
+	text-align:left;
+}
+.figurelist #scroller li {
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-o-box-sizing:border-box;
+	box-sizing:border-box;
+	display:block; float:left;
+	width:166px; height:272px;
+	
+}
+
+
+
+
+
+
+
+
+@media (min-width: 720px) { 
+	#page-translation #myModal-passage.modal{
+		width: 700px;
+		margin-left: -350px;
+	}
+}
+/***********************************/
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) { 
+	.navbar-fixed-top {
+		margin-bottom: 0px;
+	}
+	.container{
+		padding-top:0px;
+	}
+}
+ /* Landscape phone to portrait tablet */
+@media (max-width: 767px) { 
+	.navbar-fixed-top {
+		margin-bottom: 0px;
+	}	
+	.container{
+		padding-top:0px;
+	}
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) { 	
+	.navbar-fixed-top {
+		margin-bottom: 0px;
+	}	
+	.container{
+		padding-top:0px;
+	} 
+}
