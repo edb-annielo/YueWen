@@ -39,7 +39,7 @@ version = "1.0">
   <!--<access origin="http://diy.fwg.hk/ajax/import*" />-->
   
   <!-- if a single icon is specified then Build will use it for all platforms -->
-  <!--<icon src="ico/appleicon.png" />-->
+  <icon src="appfiles/icon-72.png" />
   
   <!-- the default attribute can also be used -->
   <!--<icon src="appfiles/icon.png" default="true" /> -->
@@ -50,6 +50,7 @@ version = "1.0">
   <icon src="appfiles/icon.png" gap:platform="ios"  width="57" height="57"/>
   <icon src="appfiles/icon-72.png" gap:platform="ios"  width="72" height="72"/>
   <icon src="appfiles/icon-114.png" gap:platform="ios"  width="114" height="114"/>
+  <icon src="appfiles/icon-144.png" gap:platform="ios"  width="144" height="144"/>
   <icon src="appfiles/icon-512.png" gap:platform="ios"  width="512" height="512"/>
   <icon src="appfiles/icon-1024.png" gap:platform="ios"  width="1024" height="1024"/>
   
