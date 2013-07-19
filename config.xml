@@ -79,6 +79,6 @@ version = "1.0">
   <gap:splash src="appfiles/splash-640.png" gap:platform="android" gap:density="hdpi" width="640" height="960"/>
   <gap:splash src="appfiles/splash-640.png" gap:platform="android" gap:density="xhdpi" width="640" height="960"/>
   
-  <gap:plugin name="InAppBrowser" />
+  <!--<gap:plugin name="InAppBrowser" />-->
   
 </widget>
