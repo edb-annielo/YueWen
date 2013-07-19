@@ -62,7 +62,7 @@ version = "1.0">
   
   <!-- if a single splash screen is specified it will be used for all platforms.
     Multiple splash screens are recommended for iOS -->
-  <gap:splash src="appfiles/splash.png" />
+  <!--<gap:splash src="appfiles/splash.png" />-->
   
   <!-- iOS requires specific dimensions for different devices; classic iPhone
 	screens, Retina displays, and iPad screens -->
